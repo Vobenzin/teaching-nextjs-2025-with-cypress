@@ -17,29 +17,36 @@ export default async function Home() {
     .execute();
 
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+  <>
+      <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <p className="text-4xl font-bold">Spotify</p>
-        <div className="grid grid-cols-2 gap-4">
+        <header>
+          <p className="text-4xl font-bold" data-cy="title">Spotify</p>
+        </header>
+        
+        <div className="grid grid-cols-2 gap-4" data-cy="albumCardsDiv">
           {albums.map((album) => (
-            <div key={album.id} className="card w-64 bg-base-100 shadow-sm">
-              <div className="card-body">
-                <span className="badge badge-xs badge-warning">Pop</span>
-                <h2 className="text-3xl font-bold">{album.name}</h2>
+            <div key={album.id} className="card w-64 bg-base-100 shadow-sm" data-cy="albumCard">
+              <div className="card-body" data-cy="albumCardBody">
+                <span className="badge badge-xs badge-warning" data-cy="albumCardPopSticker">Pop</span>
+                <h2 className="text-3xl font-bold" data-cy="albumCardTitle">{album.name}</h2>
 
                 <p>ID: {album.id}</p>
+
+                <p data-cy="albumCardPrice">PRICE: 3$</p>
                 <p>
                   Author:{" "}
-                  <Link href={`/author/${album.author_id}`}>
+                  <Link href={`/author/${album.author_id}`} data-cy={`AlbumCardAuthorLink${album.id}`}>
                     {album.author_name}
                   </Link>
                 </p>
                 <p>
                   Release Date: {new Date(album.release_date).toDateString()}
                 </p>
-                <div className="mt-6">
+                <div className="mt-6" data-cy="AlbumCardDetailLinkDiv">
                   <Link
                     className="btn btn-primary btn-block"
+                    data-cy={`AlbumCardDetailLink${album.id}`}
                     href={`/album/${album.id}`}
                   >
                     Detail
@@ -54,5 +61,6 @@ export default async function Home() {
         <p>Footer</p>
       </footer>
     </div>
+  </>
   );
 }

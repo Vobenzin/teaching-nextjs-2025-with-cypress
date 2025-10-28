@@ -11,9 +11,9 @@ export function NavBar() {
   const searchLinkQuery = searchInput !== "" ? { q: searchInput } : {};
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
-      <div className="flex-1">
-        <Link href="/" className="btn btn-ghost text-xl">
+    <div className="navbar bg-base-100 shadow-sm" data-cy="navbar">
+      <div className="flex-1" data-cy="navbarTitleDiv">
+        <Link href="/" className="btn btn-ghost text-xl" data-cy="navbarTitle">
           Spotify
         </Link>
       </div>
@@ -23,6 +23,7 @@ export function NavBar() {
           placeholder="Search"
           className="input input-bordered w-24 md:w-auto"
           value={searchInput}
+          data-cy="navbarInput"
           onChange={(e) => {
             setSearchInput(e.target.value);
           }}
@@ -33,6 +34,7 @@ export function NavBar() {
             query: searchLinkQuery,
           }}
           className="btn btn-ghost text-xl"
+          data-cy="navbarSearchLink"
         >
           Search
         </Link>
